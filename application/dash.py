@@ -1,5 +1,4 @@
 import dash
-import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
@@ -54,10 +53,8 @@ fig.update_layout(
 
 
 
-df = px.data.stocks()
-figtime = px.line(df, x="date", y=df.columns,
-              hover_data={"date": "|%B %d, %Y"},
-              title='custom tick labels')
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+figtime = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
 figtime.update_xaxes(
     dtick="M1",
     tickformat="%b\n%Y")
