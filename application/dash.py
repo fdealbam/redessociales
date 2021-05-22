@@ -1,4 +1,5 @@
 import dash
+import matplotlib.pyplot as plt 
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
@@ -30,9 +31,146 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 fb_abs = 8766
 fb_prc = .69
 #####################################################################################################################
-#------------------------------Graficas-----------------------------------------------------------------------------
+#procesos
+
+#Facebook twitter Instagram 
+cardredes = dbc.Card(
+    dbc.CardBody(
+        [
+               dbc.Button((["", html.P(className="fab fa-facebook", 
+                                       style={"color": "#01579B",
+                                              "background-color": "light",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("Likes", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA"}),
+ 
+               dbc.Button((["", html.P(className="fab fa-twitter", 
+                                       style={"color": "#80D8FF",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("Followers", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA"}),
+    
+               dbc.Button((["", html.P(className="fab fa-instagram", 
+                                       style={"color": "#C51162",
+                                              "background-color": "light",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("Publishing", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA" }),
+            
+        ]
+    ),
+
+    style={"border": "0",
+           "card-border": "0",
+      
+           #"height": 150,
+       #    'margin-left': '-30px',
+           "background-color": "#FAFAFA",
+          },
+)
+#-------------------------------------------------------------------------------------------------------------------
+
+#articles, releases, interviews
+cardredes2 = dbc.Card(
+    dbc.CardBody(
+        [
+               dbc.Button((["", html.P(className="far fa-file-alt", 
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("articles", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA"}),
+ 
+               dbc.Button((["", html.P(className="fas fa-bullhorn", 
+                                       style={"color": "#78909C",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("releases", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA"}),
+    
+               dbc.Button((["", html.P(className="fas fa-users", 
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "40px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":25}),
+                                html.P("interviews", style={"font-size":15}),
+                               ]),style={"background-color": "#FAFAFA" }),
+            
+        ]
+    ),
+
+    style={"border": "0",
+           "card-border": "0",
+      
+           #"height": 150,
+       #    'margin-left': '-30px',
+           "background-color": "#FAFAFA",
+          },
+)
+
+#--------------------------------------------------------------------------------------------------------------------
+botonmedio = dbc.Card(
+    dbc.CardBody(
+        [
+               dbc.Button((["", html.P("page impressions" ,
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "15px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
+                             #   html.P(className="fas fa-sort-up", 
+                             #          style={"font-size":25,
+                             #                "color":"green"}),
+                               html.P(f"{int(fb_prc):,}" "%    ▲", 
+                                       style={ "font-size": "15px"})
+                               ]),style={"background-color": "#FAFAFA"}),
+ 
+               dbc.Button((["", html.P("engaged users",
+                                       style={"color": "#78909C",
+                                              "font-size": "15px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
+                                html.P(f"{int(fb_prc):,}" "%    ▼", 
+                                       style={ "font-size": "15px"})
+                               ]),style={"background-color": "#FAFAFA"}),
+    
+               dbc.Button((["", html.P("shared stories",
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "15px"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
+                                html.P(f"{int(fb_prc):,}" "%    ▼", 
+                                       style={ "font-size": "15px"})
+                               ]),style={"background-color": "#FAFAFA" }),
+            
+               dbc.Button((["", html.P("    retweet",
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "15px",
+                                             "text-align":"center"}),
+                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
+                              html.P(f"{int(fb_prc):,}" "%    ▲", 
+                                       style={ "font-size": "15px"})
+                               ]),style={"background-color": "#FAFAFA" }),
+            
+        ]
+    ),
+
+    style={"border": "0",
+           "card-border": "0",
+      
+           #"height": 150,
+       #    'margin-left': '-30px',
+           "background-color": "#FAFAFA",
+          },
+)
+##############################################################################################################
 
 
+#GRAFICAS
+##########################################################################Grafica redes
 labels = ['facebook','instagram','twitter ','otros']
 values = [4500, 2500, 1053, 500]
 
@@ -41,19 +179,22 @@ fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
 
 fig.update_layout(
     autosize=False,
-    width=500,
-    height=500,
+    width=350,
+    height=280,
     title_text="Share of media types",
     paper_bgcolor='#FAFAFA',)
 #fig.show()
 
 
+#-------------prepara para dash
+cardgraph = dbc.Card(
+    dbc.CardBody(
+        [dcc.Graph(figure=fig)]))
+#########################################################################################
 
-
-
-
-
+################################################################################Grafica last 30 days
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
 figtime = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
 figtime.update_xaxes(
     dtick="M1",
@@ -61,12 +202,24 @@ figtime.update_xaxes(
 figtime.update_layout(
     template="plotly_white",
     autosize=False,
-    width=1000,
-    height=500,
+    width=900,
+    height=250,
     title_text="News suscribers (last 60 days)",
     paper_bgcolor='#FAFAFA',)
-#figtime.show()
-#####################################################################################################################
+
+
+
+#-------------prepara para dash
+cardgraph30days = dbc.Card(
+    dbc.CardBody(
+        [dcc.Graph(figure=figtime)]),
+    style={#"width": "20rem", 
+          "border": "0",
+           "card-border": "0",
+           #"height": 150,
+         'margin-left': '-30px',
+           "background-color": "#FAFAFA",
+          },)
 ######################################################################################################################
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Codigo del dashboard <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<#
 ###################################################################################################################### 
@@ -111,7 +264,7 @@ body = html.Div([
     #------------------------------------Titulo smf
      dbc.Row([dbc.Col(html.P("Social media followers",
                         #Style de letra
-                             style={"font-size": "40px",
+                             style={"font-size": "45px",
                               "color": "grey",
                               #'textAlign': 'center',
                                #"font-weight": 'bold',
@@ -123,97 +276,49 @@ body = html.Div([
       html.Br(),
     html.Br(),       
     #---------------------------Cuadro social media-----------------------------
+
+    dbc.Row([
+        dbc.Col([dbc.Card(cardredes),],style={"width": "35%"}),
+        dbc.Col([dbc.Card(botonmedio),],style={"width": "75%"}),#Variables Vivienda
+        dbc.Col([dbc.Card(cardgraph)],style={"width": "200px"})
+     ]),
     
-    #---------------------------Facebook-----------------------------------------
-      dbc.Row([
-          
-          dbc.Col(
-               dbc.Button((["", html.P(className="fab fa-facebook", 
-                                       style={"color": "#01579B",
-                                              "background-color": "light",
-                                              "font-size": "50px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
-                                html.P("Likes", style={"font-size":15}),
-                               ]),style={"background-color": "#FAFAFA",
-                                       
-                                        "offset": 1,
-                                        "size":1})),
-     #---------------------------Twitter------------------------------------------ 
-          dbc.Col(
-               dbc.Button((["", html.P(className="fab fa-twitter", 
-                                       style={"color": "#80D8FF",
-                                             # "background-color": "",
-                                              "font-size": "50px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
-                                html.P("Followers", style={"font-size":15}),
-                               ]),style={"background-color": "#FAFAFA",
-                                    
-                                        "offset": 1,
-                                        "size":1}),),
-          
-       #---------------------------Instagram------------------------------------- 
-        dbc.Col(
-               dbc.Button((["", html.P(className="fab fa-instagram", 
-                                       style={"color": "#C51162",
-                                              "background-color": "light",
-                                              "font-size": "50px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":30}),
-                                html.P("Publishing", style={"font-size":15}),
-                               ]),style={"background-color": "#FAFAFA",
-                                        "offset": 1,
-                                        "size":1,
-                                        "margin-right": "800px"})),#],#style={,
+    #-
+      #-----------------------------------------articles, interviews and 
+     
+    dbc.Row([
+         dbc.Col(dbc.Card(cardredes2))],
+        style={
+            
+            "margin-top": "-140px",
+            'width': '34%',
+          #  'height': '56px',
+            
+            }),
+        html.Br(),
+ #################################################################
+    dbc.Row([
+        dbc.Col(dbc.Card(cardgraph30days))] ,
+        style={
+            
+          #  "margin-top": "-240px",
+            'width': "900px",
+            'height': '56px',
+            
+            }),                      
+   
+            
 
  #----------------------------------Grafica total por red -------------------------------------
-           dbc.Col(dcc.Graph(figure=fig),style={"margin-left": "800px",
-                                               "margin-top":"-290px"})],), 
+           
 
     
  #----------------------------------Grafica total por red -------------------------------------
-           dbc.Row(
-               [
-                   dbc.Col(dcc.Graph(figure=figtime),style={#"margin-left": "800px",
-                                               "margin-top":"-50px"})],), 
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    #------------------------------------------Cuadros 
-    dbc.Row(
-        [
-            
-            dbc.Col(dbc.Button(([html.P("El monto total de Noviembre 2020 fue de: "), 
-                 html.P(f"{int(fb_abs):,}",  
-                        style={
-                               "color": "dark", 
-                               #"font-weight": 'bold',
-                               "font-size": "40px",
-                               "font-family": "Montserrat",        
-                               #"font-weight": 'bold'
-                        }),                      
-       ]),style={ "background-color": "light",
-                  "box-shadow": "50px 90px 100px gray",
-                  'margin-left': '100px',
-                 } ,disabled=True)),]),
-            
-            
-            
-            
-            dbc.Row([
-            dbc.Col(html.H6("Diciembre"),
-                   # width= 3, 
-                    width= { "size": 2, "offset":1}),
-            dbc.Col(html.H6("Enero")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Febrero")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Marzo")),
-                  # width={'size' : "auto","offset":1}),
-            dbc.Col(html.H6("Abril")),
-                  # width={'size' : "auto", "offset":1}),
-            dbc.Col(html.H6("Mayo")),
-                  # width={'size' : "auto", "offset":1}),
 
-           ], align='left'),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+
     
                
                 
@@ -241,3 +346,5 @@ app.layout = html.Div([ body,
 
 if __name__ == '__main__':
     app.run_server()
+
+    
