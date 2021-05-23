@@ -37,29 +37,75 @@ fb_prc = .69
 cardredes = dbc.Card(
     dbc.CardBody(
         [
-               dbc.Button((["", html.P(className="fab fa-facebook", 
+               dbc.Button((["", 
+                              html.Br(),
+                            html.P(className="fab fa-facebook", 
                                        style={"color": "#01579B",
                                               "background-color": "light",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("facebook", style={"font-size":13}),
+                                              "font-size": "90px",
+                                             "margin-top":"-195px"
+                                             
+                                             }),
+                               
+                              
+                                html.Br(),
                                ]),style={"background-color": "#FAFAFA"}),
  
-               dbc.Button((["", html.P(className="fab fa-twitter", 
-                                       style={"color": "#80D8FF",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("twitter", style={"font-size":13}),
-                               ]),style={"background-color": "#FAFAFA"}),
+            dbc.Button((["", html.P("impresiones", style={"font-size":13}),
+                             html.P("alcance", style={"font-size":13}),
+                             html.P("engagement", style={"font-size":13}),
+                             html.P("seguidores", style={"font-size":13}),
+                           
+                            ]),style={"background-color": "#FAFAFA"}),
     
-               dbc.Button((["", html.P(className="fab fa-instagram", 
-                                       style={"color": "#C51162",
+            dbc.Button((["", html.P(f"{int(fb_abs):,}", style={"font-size":15, "color":"#1A237E"}),
+                              html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                             html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                             html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                            ]),style={"background-color": "#FAFAFA" }),
+          
+        ]
+    ),
+
+    style={"border": "0",
+           "card-border": "0",
+      
+           #"height": 150,
+       #    'margin-left': '-30px',
+           "background-color": "#FAFAFA",
+          },
+)
+
+cardredes2 = dbc.Card(
+    dbc.CardBody(
+        [
+               dbc.Button((["", 
+                              html.Br(),
+                            html.P(className="fab fa-twitter", 
+                                       style={"color": "#01579B",
                                               "background-color": "light",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("instagram", style={"font-size":13}),
-                               ]),style={"background-color": "#FAFAFA" }),
-            
+                                              "font-size": "90px",
+                                             "margin-top":"-195px"
+                                             
+                                             }),
+                               
+                              
+                                html.Br(),
+                               ]),style={"background-color": "#FAFAFA"}),
+ 
+            dbc.Button((["", html.P("impresiones", style={"font-size":13}),
+                             html.P("alcance", style={"font-size":13}),
+                             html.P("engagement", style={"font-size":13}),
+                             html.P("seguidores", style={"font-size":13}),
+                           
+                            ]),style={"background-color": "#FAFAFA"}),
+    
+            dbc.Button((["", html.P(f"{int(fb_abs):,}", style={"font-size":15, "color":"#1A237E"}),
+                              html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                             html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                             html.P(f"{int(fb_abs):,}", style={"font-size":15}),
+                            ]),style={"background-color": "#FAFAFA" }),
+          
         ]
     ),
 
@@ -74,43 +120,43 @@ cardredes = dbc.Card(
 #-------------------------------------------------------------------------------------------------------------------
 
 #articles, releases, interviews
-cardredes2 = dbc.Card(
-    dbc.CardBody(
-        [
-               dbc.Button((["", html.P(className="far fa-file-alt", 
-                                       style={"color": "#78909C",
-                                              "background-color": "light",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("artículos", style={"font-size":13}),
-                               ]),style={"background-color": "#FAFAFA"}),
- 
-               dbc.Button((["", html.P(className="fas fa-bullhorn", 
-                                       style={"color": "#78909C",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("comunicados", style={"font-size":13}),
-                               ]),style={"background-color": "#FAFAFA"}),
-    
-               dbc.Button((["", html.P(className="fas fa-users", 
-                                       style={"color": "#78909C",
-                                              "background-color": "light",
-                                              "font-size": "40px"}),
-                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
-                                html.P("entrevistas", style={"font-size":13}),
-                               ]),style={"background-color": "#FAFAFA" }),
-            
-        ]
-    ),
-
-    style={"border": "0",
-           "card-border": "0",
-      
-           #"height": 150,
-       #    'margin-left': '-30px',
-           "background-color": "#FAFAFA",
-          },
-)
+#cardredes2 = dbc.Card(
+#    dbc.CardBody(
+#        [
+#               dbc.Button((["", html.P(className="far fa-file-alt", 
+#                                       style={"color": "#78909C",
+#                                              "background-color": "light",
+#                                              "font-size": "40px"}),
+#                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
+#                                html.P("artículos", style={"font-size":13}),
+#                               ]),style={"background-color": "#FAFAFA"}),
+# 
+#               dbc.Button((["", html.P(className="fas fa-bullhorn", 
+#                                       style={"color": "#78909C",
+#                                              "font-size": "40px"}),
+#                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
+#                                html.P("comunicados", style={"font-size":13}),
+#                               ]),style={"background-color": "#FAFAFA"}),
+#    
+#               dbc.Button((["", html.P(className="fas fa-users", 
+#                                       style={"color": "#78909C",
+#                                              "background-color": "light",
+#                                              "font-size": "40px"}),
+#                                html.P(f"{int(fb_abs):,}", style={"font-size":20}),
+#                                html.P("entrevistas", style={"font-size":13}),
+#                               ]),style={"background-color": "#FAFAFA" }),
+#            
+#        ]
+#    ),
+#
+#    style={"border": "0",
+#           "card-border": "0",
+#      
+#           #"height": 150,
+#       #    'margin-left': '-30px',
+#           "background-color": "#FAFAFA",
+#          },
+#)
 
 #--------------------------------------------------------------------------------------------------------------------
 botonmedio = dbc.Card(
@@ -346,5 +392,3 @@ app.layout = html.Div([ body,
 
 if __name__ == '__main__':
     app.run_server()
-
-    
