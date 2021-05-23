@@ -42,14 +42,14 @@ cardredes = dbc.Card(
                                               "background-color": "light",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("Likes", style={"font-size":15}),
+                                html.P("me gusta", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA"}),
  
                dbc.Button((["", html.P(className="fab fa-twitter", 
                                        style={"color": "#80D8FF",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("Followers", style={"font-size":15}),
+                                html.P("seguidores", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA"}),
     
                dbc.Button((["", html.P(className="fab fa-instagram", 
@@ -57,7 +57,7 @@ cardredes = dbc.Card(
                                               "background-color": "light",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("Publishing", style={"font-size":15}),
+                                html.P("publicaciones", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA" }),
             
         ]
@@ -82,14 +82,14 @@ cardredes2 = dbc.Card(
                                               "background-color": "light",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("articles", style={"font-size":15}),
+                                html.P("artículos", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA"}),
  
                dbc.Button((["", html.P(className="fas fa-bullhorn", 
                                        style={"color": "#78909C",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("releases", style={"font-size":15}),
+                                html.P("comunicados", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA"}),
     
                dbc.Button((["", html.P(className="fas fa-users", 
@@ -97,7 +97,7 @@ cardredes2 = dbc.Card(
                                               "background-color": "light",
                                               "font-size": "40px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":25}),
-                                html.P("interviews", style={"font-size":15}),
+                                html.P("entrevistas", style={"font-size":15}),
                                ]),style={"background-color": "#FAFAFA" }),
             
         ]
@@ -116,7 +116,7 @@ cardredes2 = dbc.Card(
 botonmedio = dbc.Card(
     dbc.CardBody(
         [
-               dbc.Button((["", html.P("page impressions" ,
+               dbc.Button((["", html.P("impresiones de la página" ,
                                        style={"color": "#78909C",
                                               "background-color": "light",
                                               "font-size": "15px"}),
@@ -128,7 +128,7 @@ botonmedio = dbc.Card(
                                        style={ "font-size": "15px"})
                                ]),style={"background-color": "#FAFAFA"}),
  
-               dbc.Button((["", html.P("engaged users",
+               dbc.Button((["", html.P("usuarios",
                                        style={"color": "#78909C",
                                               "font-size": "15px"}),
                                 html.P(f"{int(fb_abs):,}", style={"font-size":30}),
@@ -136,7 +136,7 @@ botonmedio = dbc.Card(
                                        style={ "font-size": "15px"})
                                ]),style={"background-color": "#FAFAFA"}),
     
-               dbc.Button((["", html.P("shared stories",
+               dbc.Button((["", html.P("historias compartidas",
                                        style={"color": "#78909C",
                                               "background-color": "light",
                                               "font-size": "15px"}),
@@ -204,7 +204,7 @@ figtime.update_layout(
     autosize=False,
     width=900,
     height=250,
-    title_text="News suscribers (last 60 days)",
+    title_text="seguidores nuevos (últimos 30 días)",
     paper_bgcolor='#FAFAFA',)
 
 
@@ -262,7 +262,7 @@ body = html.Div([
     html.Br(),
     #------------------------------------social media followers
     #------------------------------------Titulo smf
-     dbc.Row([dbc.Col(html.P("Social media followers",
+     dbc.Row([dbc.Col(html.P("seguidores en redes sociales",
                         #Style de letra
                              style={"font-size": "45px",
                               "color": "grey",
