@@ -93,7 +93,7 @@ seguidor.to_csv("seguidores.csv")
 seguidores = pd.read_csv("seguidores.csv")
 ################################################### grafica
 figvac_seguidores = px.pie(seguidores, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5, 
+                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5, 
                     )
 
 figvac_seguidores.update_layout(
@@ -125,7 +125,7 @@ alcance = pd.read_csv("alcance.csv")
 
 #-GRÁFICA ALCANCE
 figvac_alcance = px.pie(alcance, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5,
+                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5,
                       )
 
 figvac_alcance.update_layout(
@@ -157,7 +157,7 @@ impresiones = pd.read_csv("impresiones.csv")
 #Grafica impresiones
 
 figvac_impresiones = px.pie(impresiones, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5)
+                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5)
 
 figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title="Impresiones",
@@ -186,7 +186,7 @@ engagemen= abre[(abre["variable"] == "Mensajes recibidos.2")|
 engagemen.to_csv("engagement.csv")
 engagement = pd.read_csv("engagement.csv")
 figvac_engagement = px.pie(engagement, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5)
+                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5)
 
 figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title="Engagement ",
