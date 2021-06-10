@@ -14,7 +14,6 @@ import sidetable as stb
 import datetime
 from datetime import datetime, timedelta
 from datetime import date
-#import geopandas as gpd
 import flask
 import os
 
@@ -22,12 +21,26 @@ import os
 
 numeralia = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 #Falta renombrar columnas de la bd final 
-
+numeralia2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 
 ##########################################################################     titulo
 redes = html.Div([
-  html.P("Redes sociales"),
+   dbc.Row(
+            [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
+                        width={'size': 1,  "offset": 1 }),
+             dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
+                            "Subsecretaría para Asuntos Multilaterales y "
+                            "Derechos Humanos"),
+                        width={'size': 6, 'offset' : 0}), 
+        ],justify="start"),
     
+    dbc.Row(
+        [dbc.Col(html.H1(['Redes Sociales ']),
+                style={"color": "red", 'text-transform': "uppercase", 
+                       "font-weight": 'bolder', "font-stretch": "condensed",
+                      "font-size": "x-large" },
+                width={ "offset":2 }),
+    ]),
   
   html.Br(),
   html.Br(),
@@ -58,10 +71,137 @@ cardredes = dbc.Card(
                                           )),
                             html.Br(),
                                ]))]) ,
-    style={'margin-left': '.74em',
+    style={'margin-left': '.7em',
            'height': '21em',
            'width': '7em', }
 )
+#############################################################################  gráfica donas
+#tratamiento para gráfica 
+# Add the grand total row, summing all values in a column
+base = numeralia.loc['Grand Total', :] = numeralia.sum()
+base.to_csv("basetotales.csv")
+abre= pd.read_csv("basetotales.csv")
+abre.rename(columns = {"0":'valor', 'Unnamed: 0':'variable'}, inplace = True)
+
+#seleccionar columnas seguidores
+seguidor = abre[(abre["variable"] == "Nuevos seguidores")|
+                  (abre["variable"] == "Nuevos seguidores.1")|
+                  (abre["variable"] == "Nuevos likes")]
+
+
+seguidor.to_csv("seguidores.csv")
+seguidores = pd.read_csv("seguidores.csv")
+################################################### grafica
+figvac_seguidores = px.pie(seguidores, values='valor', names='variable',
+                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5, 
+                    )
+
+figvac_seguidores.update_layout(
+    title="Seguidores",
+                  paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  autosize=True,
+                  font_color="black",
+                  title_font_color="black",
+                  width=250,
+                  height=250,
+                  showlegend=False
+                               ),
+    
+colors = ['#B3E5FC']
+
+figvac_seguidores.update_traces(rotation=90,
+                               marker=dict(colors=colors))
+
+#---------------------------------------------------------------------------------------GRAFICA ALCANCE
+#seleccionar columnas alcance
+alcanc = abre[(abre["variable"] == "Cantidad de posts")|
+                (abre["variable"] == "Número de tweets")|
+                (abre["variable"] == "Número de posts")]
+
+
+alcanc.to_csv("alcance.csv")
+alcance = pd.read_csv("alcance.csv")
+
+#-GRÁFICA ALCANCE
+figvac_alcance = px.pie(alcance, values='valor', names='variable',
+                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5,
+                      )
+
+figvac_alcance.update_layout(
+    title="Alcance",
+    paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  autosize=True,
+                  font_color="black",
+                  title_font_color="black",
+                  width=250,
+                  height=250,
+                  showlegend=False),
+    
+colors = ['#B3E5FC']
+
+figvac_alcance.update_traces(rotation=90,
+                               marker=dict(colors=colors))
+
+
+####--------------------------------------------------------------------------------GRAFICA IMPRESIONES
+#seleccionar columnas impresiones
+impresione = abre[(abre["variable"] == "Cantidad de comentarios")|
+                  (abre["variable"] == "Retweets realizados")|
+                  (abre["variable"] == "Número de Stories")]
+
+
+impresione.to_csv("impresiones.csv")
+impresiones = pd.read_csv("impresiones.csv")
+#Grafica impresiones
+
+figvac_impresiones = px.pie(impresiones, values='valor', names='variable',
+                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5)
+
+figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  title="Impresiones",
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  autosize=True,
+                  font_color="black",
+                  title_font_color="black",
+                  width=250,
+                  height=250,
+                  showlegend=False),
+    
+colors = ['#B3E5FC']
+
+figvac_impresiones.update_traces(rotation=90,
+                               marker=dict(colors=colors))
+
+############################################################################## ENGAGEMENT
+
+
+#seleccionar columnas engagement
+engagemen= abre[(abre["variable"] == "Mensajes recibidos.2")|
+                (abre["variable"] == "Mensajes recibidos")|
+                (abre["variable"] == "Mensajes recibidos.1")]
+
+
+engagemen.to_csv("engagement.csv")
+engagement = pd.read_csv("engagement.csv")
+figvac_engagement = px.pie(engagement, values='valor', names='variable',
+                color_discrete_sequence=px.colors.sequential.Turbo, hole=.5)
+
+figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+                  title="Engagement ",
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  autosize=True,
+                  font_color="black",
+                  title_font_color="black",
+                  width=250,
+                  height=250,
+                  showlegend=False),
+    
+colors = ['#B3E5FC']
+
+figvac_engagement.update_traces(rotation=90,
+                               marker=dict(colors=colors))
 
 #############################################################################  gráfica 
 
@@ -95,30 +235,30 @@ grafica  = dbc.Card(
 ################################################################################# TABLAS SEGUIDORES, ALCANCE...
 #1
 #identificadores FACEBOOK
-seg_fb = numeralia["Nuevos likes"].sum()
-alc_fb = numeralia["Cantidad de posts"].sum()
-imp_fb = numeralia["Cantidad de comentarios"].sum()
-eng_fb = numeralia["Mensajes recibidos.2"].sum()
+seg_fb = numeralia2["Nuevos likes"].sum()
+alc_fb = numeralia2["Cantidad de posts"].sum()
+imp_fb = numeralia2["Cantidad de comentarios"].sum()
+eng_fb = numeralia2["Mensajes recibidos.2"].sum()
 
 #2
 #identificadores TWITTER
-seg_tw =  numeralia["Nuevos seguidores"].sum()
-alc_tw =  numeralia["Número de tweets"].sum()
-imp_tw =  numeralia["Retweets realizados"].sum()
-eng_tw =  numeralia["Mensajes recibidos"].sum()
+seg_tw =  numeralia2["Nuevos seguidores"].sum()
+alc_tw =  numeralia2["Número de tweets"].sum()
+imp_tw =  numeralia2["Retweets realizados"].sum()
+eng_tw =  numeralia2["Mensajes recibidos"].sum()
 
 #3
 #identificadores INSTAGRAM
-seg_insta = numeralia["Nuevos seguidores.1"].sum()
-alc_insta = numeralia["Número de posts"].sum()
-imp_insta = numeralia["Número de Stories"].sum()
-eng_insta = numeralia["Mensajes recibidos.1"].sum()
+seg_insta = numeralia2["Nuevos seguidores.1"].sum()
+alc_insta = numeralia2["Número de posts"].sum()
+imp_insta = numeralia2["Número de Stories"].sum()
+eng_insta = numeralia2["Mensajes recibidos.1"].sum()
 
 
 #articulos, comunicados, entrevistas
-articulos   = numeralia["Cantidad de artículos"].sum()
-comunicados = numeralia["Cantidad de comunicados"].sum()
-entrevistas = numeralia["Cantidad de entrevistas"].sum()
+articulos   = numeralia2["Cantidad de artículos"].sum()
+comunicados = numeralia2["Cantidad de comunicados"].sum()
+entrevistas = numeralia2["Cantidad de entrevistas"].sum()
 
 
 
@@ -241,7 +381,27 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.
                                                 FONT_AWESOMEpro], server=server)
 
 app.layout = html.Div(
-    [redes, cardredes, tableseguidores,tablealcance ,tableImpresiones,tableEngagement,  grafica ], 
+    [redes, cardredes, tableseguidores,tablealcance ,tableImpresiones,tableEngagement,
+     html.Br(),
+    # html.P("prueba"),
+
+    dbc.Row([
+        dbc.Col(dcc.Graph(figure=figvac_seguidores, config= "autosize")),
+        dbc.Col(dcc.Graph(figure=figvac_alcance, config= "autosize"), 
+                style={"margin-left": "-115px"}),
+        dbc.Col(dcc.Graph(figure=figvac_impresiones, config= "autosize"),
+                style={"margin-left": "-115px"}),
+        dbc.Col(dcc.Graph(figure=figvac_engagement, config= "autosize"),
+                style={"margin-left": "-115px"}),
+    ],style={"width":"1000px"}),
+     html.Br(),
+     
+    # graficaseguidores, graficaalcance,graficaimpresiones,
+     grafica,
+ 
+    
+ 
+    ], 
             style={
           #  'margin-top': '0px',
            # 'margin-left': '5px',
