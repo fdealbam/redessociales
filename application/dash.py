@@ -28,18 +28,21 @@ redes = html.Div([
    dbc.Row(
             [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
                         width={'size': 1,  "offset": 1 }),
-             dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
+             dbc.Col(html.H6("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
                             "Derechos Humanos"),
-                        width={'size': 6, 'offset' : 0}), 
+                        width={'size': 7, 'offset' : 0}), 
         ],justify="start"),
-    
+  html.Br(),
+  html.Br(),
     dbc.Row(
-        [dbc.Col(html.H1(['Redes Sociales ']),
-                style={"color": "red", 'text-transform': "uppercase", 
+        [dbc.Col(html.P(['Imagen en redes Sociales ']),
+                style={"color": "brown", 'text-transform': "uppercase", 
                        "font-weight": 'bolder', "font-stretch": "condensed",
-                      "font-size": "x-large" },
-                width={ "offset":2 }),
+                      "font-size": "x-large",
+                      "margin-left":"100px"},
+                #width={ "offset":"500px" }
+                ),
     ]),
   
   html.Br(),
@@ -93,8 +96,9 @@ seguidor.to_csv("seguidores.csv")
 seguidores = pd.read_csv("seguidores.csv")
 ################################################### grafica
 figvac_seguidores = px.pie(seguidores, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5, 
+                color_discrete_sequence=px.colors.sequential.Peach, hole=.3,
                     )
+
 
 figvac_seguidores.update_layout(
     title="Seguidores",
@@ -102,6 +106,8 @@ figvac_seguidores.update_layout(
                   plot_bgcolor='rgba(0,0,0,0)',
                   autosize=True,
                   font_color="black",
+                  title_font_size=10,
+                  legend_title_side="left",
                   title_font_color="black",
                   width=250,
                   height=250,
@@ -110,8 +116,11 @@ figvac_seguidores.update_layout(
     
 colors = ['#B3E5FC']
 
-figvac_seguidores.update_traces(rotation=90,
-                               marker=dict(colors=colors))
+figvac_seguidores.update_traces(rotation=220,
+                               marker=dict(#colors=colors,
+                                          ))
+
+
 
 #---------------------------------------------------------------------------------------GRAFICA ALCANCE
 #seleccionar columnas alcance
@@ -125,7 +134,7 @@ alcance = pd.read_csv("alcance.csv")
 
 #-GRÁFICA ALCANCE
 figvac_alcance = px.pie(alcance, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5,
+                color_discrete_sequence=px.colors.sequential.Brwnyl, hole=.3,
                       )
 
 figvac_alcance.update_layout(
@@ -134,6 +143,8 @@ figvac_alcance.update_layout(
                   plot_bgcolor='rgba(0,0,0,0)',
                   autosize=True,
                   font_color="black",
+                  title_font_size=10,
+                  legend_title_text="top",
                   title_font_color="black",
                   width=250,
                   height=250,
@@ -141,8 +152,9 @@ figvac_alcance.update_layout(
     
 colors = ['#B3E5FC']
 
-figvac_alcance.update_traces(rotation=90,
-                               marker=dict(colors=colors))
+figvac_alcance.update_traces(rotation=220,
+                               marker=dict(#colors=colors
+                                          ))
 
 
 ####--------------------------------------------------------------------------------GRAFICA IMPRESIONES
@@ -157,13 +169,15 @@ impresiones = pd.read_csv("impresiones.csv")
 #Grafica impresiones
 
 figvac_impresiones = px.pie(impresiones, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5)
+                color_discrete_sequence=px.colors.sequential.Tealgrn, hole=.3)
 
 figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title="Impresiones",
                   plot_bgcolor='rgba(0,0,0,0)',
                   autosize=True,
                   font_color="black",
+                  title_font_size=10,
+                  legend_title_text="top",
                   title_font_color="black",
                   width=250,
                   height=250,
@@ -171,8 +185,9 @@ figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
     
 colors = ['#B3E5FC']
 
-figvac_impresiones.update_traces(rotation=90,
-                               marker=dict(colors=colors))
+figvac_impresiones.update_traces(rotation=250,
+                               marker=dict(#colors=colors
+                                          ))
 
 ############################################################################## ENGAGEMENT
 
@@ -186,13 +201,15 @@ engagemen= abre[(abre["variable"] == "Mensajes recibidos.2")|
 engagemen.to_csv("engagement.csv")
 engagement = pd.read_csv("engagement.csv")
 figvac_engagement = px.pie(engagement, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Bluered, hole=.5)
+                color_discrete_sequence=px.colors.sequential.Purp, hole=.3)
 
 figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title="Engagement ",
                   plot_bgcolor='rgba(0,0,0,0)',
                   autosize=True,
                   font_color="black",
+                  title_font_size=10,
+                  legend_title_text="top",
                   title_font_color="black",
                   width=250,
                   height=250,
@@ -200,15 +217,16 @@ figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
     
 colors = ['#B3E5FC']
 
-figvac_engagement.update_traces(rotation=90,
-                               marker=dict(colors=colors))
+figvac_engagement.update_traces(rotation=265,
+                               marker=dict(#colors=colors
+                                          ))
 
 #############################################################################  gráfica 
 
 #GRAFICA PARA MEJORAR
 
 figaro2 = go.Figure()
-figaro2.add_trace(go.Bar(x=numeralia['Periodo'],y=numeralia['Nuevos seguidores'],
+figaro2.add_trace(go.Bar(x=numeralia2['Periodo'],y=numeralia2['Nuevos seguidores'],
                 marker_color='salmon'  # cambiar nuemeritos de rgb
                ))
 figaro2.update_layout(
@@ -216,22 +234,23 @@ figaro2.update_layout(
     plot_bgcolor='rgba(0,0,0,0)',
     xaxis_tickangle=-45,
     template = 'simple_white',
-    title='',
+    title='Seguidores Facebook',
+    title_font_size= 14,
     xaxis_tickfont_size= 6,
-    yaxis=dict(
-        title='Nuevos seguidores FB',
-        titlefont_size=14,
-        tickfont_size=12,
-        titlefont_family= "Monserrat"),
+    #yaxis=dict(
+        #title='Seguidores F',
+        #titlefont_size=14,
+        #tickfont_size=12,
+        #titlefont_family= "Monserrat"),
     #autosize=False,
-    width=800,
+    width=900,
     height=400
     )
 
 
 #PARA LA APP
-grafica  = dbc.Card(
-    dbc.CardBody(dcc.Graph(figure=figaro2, config= "autosize")))
+#grafica  = dbc.Card(
+#    dbc.CardBody(dcc.Graph(figure=figaro2, config= "autosize")))
 ################################################################################# TABLAS SEGUIDORES, ALCANCE...
 #1
 #identificadores FACEBOOK
@@ -382,22 +401,26 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.
 
 app.layout = html.Div(
     [redes, cardredes, tableseguidores,tablealcance ,tableImpresiones,tableEngagement,
-     html.Br(),
     # html.P("prueba"),
 
     dbc.Row([
-        dbc.Col(dcc.Graph(figure=figvac_seguidores, config= "autosize")),
-        dbc.Col(dcc.Graph(figure=figvac_alcance, config= "autosize"), 
-                style={"margin-left": "-115px"}),
-        dbc.Col(dcc.Graph(figure=figvac_impresiones, config= "autosize"),
-                style={"margin-left": "-115px"}),
-        dbc.Col(dcc.Graph(figure=figvac_engagement, config= "autosize"),
-                style={"margin-left": "-115px"}),
-    ],style={"width":"1000px"}),
+        dbc.Col(dcc.Graph(figure=figvac_seguidores),# config= "autosize"),
+                style={"margin-left": "40px"}),
+        dbc.Col(dcc.Graph(figure=figvac_alcance),# config= "autosize"), 
+                style={"margin-left": "-125px"}),
+        dbc.Col(dcc.Graph(figure=figvac_impresiones),# config= "autosize"),
+                style={"margin-left": "-125px"}),
+        dbc.Col(dcc.Graph(figure=figvac_engagement),# config= "autosize"),
+                style={"margin-left": "-125px"}),
+    ],style={"width":"850px"}),
      html.Br(),
      
     # graficaseguidores, graficaalcance,graficaimpresiones,
-     grafica,
+    dbc.Row([
+        dbc.Col(dcc.Graph(figure=figaro2),#, config= "autosize"),
+                style={"margin-left": "10px"}),
+    ]),#"",style={"width":"1000px"}),
+     html.Br(),
  
     
  
@@ -414,3 +437,4 @@ app.layout = html.Div(
 if __name__ == '__main__':
     app.run_server()
  
+
