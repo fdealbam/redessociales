@@ -345,14 +345,14 @@ app.layout = html.Div([
                         width={'size': 3, 'offset' : 0}), 
         ],justify="start"),
   html.Br(),
-  html.P("Fecha de actualizacion : 30 de abril de 2021", 
-         style={"font-size":16, "margin-left":"1200px",
+  html.P("Fecha de actualizacion : del 1o de enero al 30 de abril de 2021", 
+         style={"font-size":18, "margin-left":"1100px",
                                 "font-family":"Sitka Text","color":"gray",}),
   html.Br(),
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Imagen institucional']),
+        [dbc.Col(html.P(['Imagen institucional (ene-abr)']),
                 style={"font-size":48, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
@@ -418,7 +418,7 @@ app.layout = html.Div([
      html.Br(),
     
     
-    html.P("Influencia en medios",style={"font-size":48, "margin-left":"100px",
+    html.P("Influencia en medios (ene-abr)",style={"font-size":48, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
