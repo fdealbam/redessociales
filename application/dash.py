@@ -1,5 +1,4 @@
 
-
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -61,8 +60,12 @@ eng_insta = numeralia2["Mensajes recibidos.1"].sum()
 articulos   = numeralia2["Cantidad de artículos"].sum()
 comunicados = numeralia2["Cantidad de comunicados"].sum()
 entrevistas = numeralia2["Cantidad de entrevistas"].sum()
-    
-    
+
+#totales secciones
+tot_seg = seg_fb + seg_tw + seg_insta    
+tot_alc = alc_fb + alc_tw + alc_insta
+tot_imp = imp_fb + imp_tw + imp_insta
+tot_eng = eng_fb + eng_tw + eng_insta
 ###########################################################################    
 # gráfica donas
 ###########################################################################    
@@ -345,9 +348,77 @@ app.layout = html.Div([
                         width={'size': 3, 'offset' : 0}), 
         ],justify="start"),
   html.Br(),
-  html.P("Fecha de actualizacion : del 1o de enero al 30 de abril de 2021", 
-         style={"font-size":18, "margin-left":"1100px",
+  html.P("Fecha de actualización : del 1o de enero al 30 de abril de 2021", 
+         style={"font-size":28, "margin-left":"1100px",
                                 "font-family":"Sitka Text","color":"gray",}),
+  html.Br(),
+  html.Br(),
+  html.Br(),
+  html.Br(),
+  html.Br(),
+    
+    #Cuadros totales generales 
+      dbc.Button(([html.P("Seguidores", style={"font-size": "20px",
+                                              "font-family":"Sitka Text"}), 
+                 html.P(f"{int(tot_seg):,}",  
+                        style={
+                               "color": "dark", 
+                               #"font-weight": 'bold',
+                               "font-size": "40px",
+                               "font-family": "Sitka Text",        
+                               #"font-weight": 'bold'
+                        }),                      
+       ]),style={ "background-color": "light",
+                  "box-shadow": "10px 20px 30px gray",
+                  'margin-left': '250px',
+                 } ,disabled=True),
+      dbc.Button(([html.P("Alcance", style={"font-size": "20px",
+                                              "font-family":"Sitka Text"}), 
+                 html.P((tot_alc),  
+                        style={
+                               "color": "dark", 
+                               #"font-weight": 'bold',
+                               "font-size": "40px",
+                               "font-family": "Sitka Text",        
+                               #"font-weight": 'bold'
+                        }),                      
+       ]),style={ "background-color": "light",
+                  "box-shadow": "10px 20px 30px gray",
+                  'margin-left': '225px',
+                 } ,disabled=True),
+      dbc.Button(([html.P("Impresiones", style={"font-size": "20px",
+                                              "font-family":"Sitka Text"}), 
+                 html.P((tot_imp),  
+                        style={
+                               "color": "dark", 
+                               #"font-weight": 'bold',
+                               "font-size": "40px",
+                               "font-family": "Sitka Text",        
+                               #"font-weight": 'bold'
+                        }),                      
+       ]),style={ "background-color": "light",
+                  "box-shadow": "10px 20px 30px gray",
+                  'margin-left': '250px',
+                 } ,disabled=True),
+      dbc.Button(([html.P("Engagement", style={"font-size": "20px",
+                                              "font-family":"Sitka Text"}), 
+                 html.P((tot_eng),  
+                        style={
+                               "color": "dark", 
+                               #"font-weight": 'bold',
+                               "font-size": "40px",
+                               "font-family": "Sitka Text",        
+                               #"font-weight": 'bold'
+                        }),                      
+       ]),style={ "background-color": "light",
+                  "box-shadow": "10px 20px 30px gray",
+                  'margin-left': '250px',
+                 } ,disabled=True),
+  html.Br(),
+  html.Br(),
+  html.Br(),
+ html.Br(),
+  html.Br(),
   html.Br(),
   html.Br(),
   html.Br(),
@@ -357,14 +428,6 @@ app.layout = html.Div([
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ]),
-  
-  
- 
-  html.Br(),
-  html.Br(),
-  html.Br(),
-  html.Br(),
-  html.Br(),
  #######################################################
     #ICONOS
  ####################################################
@@ -384,7 +447,7 @@ app.layout = html.Div([
     ##########################################################
     dbc.Table(table_header + table_body, bordered=True, 
                             style={'width': '7em', 
-                                   "margin-top":"-350px",
+                                   "margin-top":"-250px",
                                    "margin-left":"130px",
                                   "background-color":"#FAFAFA"} ),
      html.Br(),
@@ -441,7 +504,7 @@ app.layout = html.Div([
                                 html.Br(),
                                 html.P("Entrevistas", style={"font-size":25}),
                                         ]),style={"background-color": "#FAFAFA",
-                                         "margin-left": "300px",         
+                                         "margin-left": "350px",         
                                          #"margin-right": "50px",
                                         }),      
 
