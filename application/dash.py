@@ -266,7 +266,7 @@ figtres = go.Figure(data=[
     go.Bar(name='Twitter', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores"], marker_color='#82B1FF')
 ])
 # Change the bar mode
-figtres.update_layout(height=600,width=1250,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
+figtres.update_layout(height=600,width=1390,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',xaxis_tickfont_size= 16,title_font_size= 14,
                     legend = dict(font = dict(family = "Sitka Text", size = 16, color = "black")),
                   legend_title = dict(font = dict(family = "Sitka Text", size = 16, color = "black")))
