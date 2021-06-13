@@ -1,4 +1,5 @@
 
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -26,7 +27,12 @@ numeralia2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessocial
 
 
 
+totalesredes = pd.read_csv("Seguimiento RS, comunicados, art, entrevistas 2021.csv")
+totfacebook= totalesredes["27-may"][0:1]
+totfacebook
 
+
+totalesredes = pd.read_csv("Seguimiento RS, comunicados, art, entrevistas 2021a.csv")
 
 
 
@@ -66,6 +72,12 @@ tot_seg = seg_fb + seg_tw + seg_insta
 tot_alc = alc_fb + alc_tw + alc_insta
 tot_imp = imp_fb + imp_tw + imp_insta
 tot_eng = eng_fb + eng_tw + eng_insta
+
+
+tot= totalesredes["27-may"][0:4].astype(int)
+totseggral= tot.sum()
+
+
 ###########################################################################    
 # gráfica donas
 ###########################################################################    
@@ -120,41 +132,41 @@ figvac_seguidores.update_traces(rotation=220,
 
 
 ################################################### 
-# Grafica 2. ALCANCE
-
-#seleccionar columnas alcance
-alcanc = abre[(abre["variable"] == "Cantidad de posts")|
-                (abre["variable"] == "Número de tweets")|
-                (abre["variable"] == "Número de posts")]
-
-
-alcanc.to_csv("alcance.csv")
-alcance = pd.read_csv("alcance.csv")
-
-#-GRÁFICA ALCANCE
-figvac_alcance = px.pie(alcance, values='valor', names='variable',
-                color_discrete_sequence=px.colors.sequential.Brwnyl, hole=.3,
-                      )
-
-figvac_alcance.update_layout(
-    #title="Alcance",
-    paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',
-                  autosize=True,
-                  font_color="black",
-                  title_font_size=10,
-                  legend_title_text="top",
-                  title_font_color="black",
-                  width=300,
-                  height=300,
-                  showlegend=False),
-    
-colors = ['#B3E5FC']
-
-figvac_alcance.update_traces(rotation=220,
-                               marker=dict(#colors=colors
-                                          ))
-
+## Grafica 2. ALCANCE
+#
+##seleccionar columnas alcance
+#alcanc = abre[(abre["variable"] == "Cantidad de posts")|
+#                (abre["variable"] == "Número de tweets")|
+#                (abre["variable"] == "Número de posts")]
+#
+#
+#alcanc.to_csv("alcance.csv")
+#alcance = pd.read_csv("alcance.csv")
+#
+##-GRÁFICA ALCANCE
+#figvac_alcance = px.pie(alcance, values='valor', names='variable',
+#                color_discrete_sequence=px.colors.sequential.Brwnyl, hole=.3,
+#                      )
+#
+#figvac_alcance.update_layout(
+#    #title="Alcance",
+#    paper_bgcolor='rgba(0,0,0,0)',
+#                  plot_bgcolor='rgba(0,0,0,0)',
+#                  autosize=True,
+#                  font_color="black",
+#                  title_font_size=10,
+#                  legend_title_text="top",
+#                  title_font_color="black",
+#                  width=300,
+#                  height=300,
+#                  showlegend=False),
+#    
+#colors = ['#B3E5FC']
+#
+#figvac_alcance.update_traces(rotation=220,
+#                               marker=dict(#colors=colors
+#                                          ))
+#
 
 
 
@@ -262,30 +274,30 @@ figaro2.update_layout(
 # Tabla
 table_header = [
     html.Thead(html.Tr([html.Th("Seguidores",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
-                        html.Th("Alcance",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center",}),
+                        #html.Th("Alcance",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center",}),
                         html.Th("Impresiones",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
                         html.Th("Engagement",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"})
                        ]))
 ]
 
 row1_fb = html.Tr([html.Td(f"{seg_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
-                  html.Td(f"{alc_fb:,d}", style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
+                  #html.Td(f"{alc_fb:,d}", style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
                   html.Td(f"{imp_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
                   html.Td(f"{eng_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
                    ])
 row2_tw = html.Tr([html.Td(f"{seg_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
-                  html.Td(f"{alc_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
+                  #html.Td(f"{alc_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
                   html.Td(f"{imp_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
                   html.Td(f"{eng_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}), 
                  ])
 row3_it = html.Tr([html.Td(f"{seg_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
-                   html.Td(f"{alc_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
+                   #html.Td(f"{alc_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
                    html.Td(f"{imp_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
                    html.Td(f"{eng_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"})
                   ])
 
 row_gs= html.Tr([html.Td(dcc.Graph(figure=figvac_seguidores)),
-                 html.Td(dcc.Graph(figure=figvac_alcance)),
+                 #html.Td(dcc.Graph(figure=figvac_alcance)),
                  html.Td(dcc.Graph(figure=figvac_impresiones)),
                  html.Td(dcc.Graph(figure=figvac_engagement)), 
                  
@@ -348,8 +360,8 @@ app.layout = html.Div([
                         width={'size': 3, 'offset' : 0}), 
         ],justify="start"),
   html.Br(),
-  html.P("Fecha de actualización : del 1o de enero al 30 de abril de 2021", 
-         style={"font-size":28, "margin-left":"1100px",
+  html.P("Intervalo de medición: del 1o de enero al 30 de abril 2021", 
+         style={"font-size":28, "margin-left":"380px",
                                 "font-family":"Sitka Text","color":"gray",}),
   html.Br(),
   html.Br(),
@@ -360,7 +372,7 @@ app.layout = html.Div([
     #Cuadros totales generales 
       dbc.Button(([html.P("Seguidores", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                 html.P(f"{int(tot_seg):,}",  
+                 html.P(f"{int(totseggral):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
@@ -372,20 +384,22 @@ app.layout = html.Div([
                   "box-shadow": "10px 20px 30px gray",
                   'margin-left': '250px',
                  } ,disabled=True),
-      dbc.Button(([html.P("Alcance", style={"font-size": "20px",
-                                              "font-family":"Sitka Text"}), 
-                 html.P((tot_alc),  
-                        style={
-                               "color": "dark", 
-                               #"font-weight": 'bold',
-                               "font-size": "40px",
-                               "font-family": "Sitka Text",        
-                               #"font-weight": 'bold'
-                        }),                      
-       ]),style={ "background-color": "light",
-                  "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '225px',
-                 } ,disabled=True),
+    
+#     dbc.Button(([html.P("Alcance", style={"font-size": "20px",
+#                                             "font-family":"Sitka Text"}), 
+#                html.P((tot_alc),  
+#                       style={
+#                              "color": "dark", 
+#                              #"font-weight": 'bold',
+#                              "font-size": "40px",
+#                              "font-family": "Sitka Text",        
+#                              #"font-weight": 'bold'
+#                       }),                      
+#      ]),style={ "background-color": "light",
+#                 "box-shadow": "10px 20px 30px gray",
+#                 'margin-left': '225px',
+#                } ,disabled=True),
+#   
       dbc.Button(([html.P("Impresiones", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
                  html.P((tot_imp),  
@@ -398,8 +412,9 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '250px',
+                  'margin-left': '200px',
                  } ,disabled=True),
+    
       dbc.Button(([html.P("Engagement", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
                  html.P((tot_eng),  
@@ -412,7 +427,7 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '250px',
+                  'margin-left': '200px',
                  } ,disabled=True),
   html.Br(),
   html.Br(),
@@ -423,7 +438,7 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Imagen institucional (ene-abr)']),
+        [dbc.Col(html.P(['Crecimiento imagen institucional (ene-abr)']),
                 style={"font-size":48, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
@@ -504,7 +519,7 @@ app.layout = html.Div([
                                 html.Br(),
                                 html.P("Entrevistas", style={"font-size":25}),
                                         ]),style={"background-color": "#FAFAFA",
-                                         "margin-left": "350px",         
+                                         "margin-left": "150px",         
                                          #"margin-right": "50px",
                                         }),      
 
@@ -518,7 +533,7 @@ app.layout = html.Div([
                                 html.Br(),
                                 html.P("Comunicados", style={"font-size":25}),
                                ]),style={#"margin-right": "50px",
-                                         "margin-left": "200px",
+                                         "margin-left": "150px",
                                          "background-color": "#FAFAFA"}),
 
      # ARticulos    
@@ -531,10 +546,27 @@ app.layout = html.Div([
                                 html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                                 html.Br(),
                                 html.P("artículos", style={"font-size":25}),
-                               ]),style={"margin-left": "200px",
+                               ]),style={"margin-left": "150px",
                                          #"margin-right": "120px",
                                          "background-color": "#FAFAFA"}),
  
+
+     # Presencia en medios    
+     dbc.Button(([html.P(className="far fa-file-alt", 
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "100px"}),
+                                html.Br(),
+                                html.Br(),
+                                html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
+                                html.Br(),
+                                html.P("Presencia en medios", style={"font-size":25}),
+                               ]),style={"margin-left": "150px",
+                                         #"margin-right": "120px",
+                                         "background-color": "#FAFAFA"}),
+ 
+         
+         
          
      ]),
        html.Br(),
