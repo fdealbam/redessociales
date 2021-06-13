@@ -1,3 +1,4 @@
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -454,14 +455,14 @@ app.layout = html.Div([
     #ICONOS
  ####################################################
   dbc.Button(([
-      dbc.Row(html.P(className="fab fa-facebook",style={"color": "#01579B" ,"font-size": "75px"} )),
+      dbc.Row(html.P(className="fab fa-facebook",style={'margin-top':'1.3em',"color": "#01579B" ,"font-size": "75px"} )),
                    html.Br(),
       dbc.Row(html.P(className="fab fa-twitter",style={"color": "#01579B","font-size": "75px"})),
                    html.Br(),
       dbc.Row(html.P(className="fab fa-instagram",style={"color": "#C51162", "font-size": "75px"})),
                    html.Br(),
                                ]),disabled=True ,style={'margin-left':'.7em',
-                                          #'margin-top':'-.10rem',
+                                          'margin-top':'.50em',
                                           'height': '21em',
                                           'width': '7em', }),
     ###########################################################
