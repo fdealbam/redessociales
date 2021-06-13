@@ -25,14 +25,12 @@ numeralia = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociale
 #Falta renombrar columnas de la bd final 
 numeralia2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 
-
-
 totalesredes = pd.read_csv("Seguimiento RS, comunicados, art, entrevistas 2021.csv")
 totfacebook= totalesredes["27-may"][0:1]
 totfacebook
 
 
-totalesredes = pd.read_csv("Seguimiento RS, comunicados, art, entrevistas 2021a.csv")
+totalesredes = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Seguimiento%20RS%2C%20comunicados%2C%20art%2C%20entrevistas%202021a.csv")
 
 
 
@@ -412,7 +410,7 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '200px',
+                  'margin-left': '180px',
                  } ,disabled=True),
     
       dbc.Button(([html.P("Engagement", style={"font-size": "20px",
@@ -427,7 +425,7 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '200px',
+                  'margin-left': '180px',
                  } ,disabled=True),
   html.Br(),
   html.Br(),
