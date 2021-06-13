@@ -583,11 +583,11 @@ app.layout = html.Div([
                                          "background-color": "#FAFAFA"}),
  
 
-     # Presencia en medios    
-     dbc.Button(([html.P(className="fas fa-head-cough", 
+     # Presencia en medios     
+     dbc.Button(([html.P(className="far fa-newspaper", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
-                                              "font-size": "80px"}),
+                                              "font-size": "90px"}),
                                 html.Br(),
                                 html.Br(),
                                 html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
