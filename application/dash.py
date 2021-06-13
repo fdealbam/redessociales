@@ -626,6 +626,8 @@ app.layout = html.Div([
                         width={'size': 3, 'offset' : 0}), 
         ],justify="start"),
        html.Br(),
+       html.Br(),
+       html.Br(),
     
  
     ], 
