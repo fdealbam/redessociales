@@ -1,4 +1,3 @@
-
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -71,7 +70,9 @@ tot_eng = eng_fb + eng_tw + eng_insta
 
 
 tot= totalesredes["27-may"][0:4].astype(int)
-totseggral= tot.sum()
+tottwitter = tot[0]
+totfacebook = tot[1]
+totinstagram = tot[2]
 
 
 ###########################################################################    
@@ -372,13 +373,19 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
   html.Br(),
+    dbc.Row(
+        [dbc.Col(html.P(['Total de seguidores en el período (ene-abr)']),
+                style={"font-size":48, "margin-left":"100px",
+                                "font-family":"Sitka Text","color":"purple",
+                                "text-align": "left"}),
+    ], ),
   html.Br(),
     
     #Cuadros totales generales 
     dbc.Row([
-        dbc.Col(dbc.Button(([html.P("Seguidores", style={"font-size": "20px",
+        dbc.Col(dbc.Button(([html.P("Twitter", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                 html.P(f"{int(totseggral):,}",  
+                 html.P(f"{int(tottwitter):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
@@ -387,7 +394,7 @@ app.layout = html.Div([
                                #"font-weight": 'bold'
                         }),                      
        ]),style={ "background-color": "light",
-                  "box-shadow": "10px 20px 30px gray",
+                  "box-shadow": "10px 20px 30px black",
               
                   'margin-left': '250px',
                  } ,disabled=True)),
@@ -407,33 +414,33 @@ app.layout = html.Div([
 #                 'margin-left': '225px',
 #                } ,disabled=True),
 #   
-     dbc.Col(dbc.Button(([html.P("Impresiones", style={"font-size": "20px",
+         dbc.Col(dbc.Button(([html.P("Facebook", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                 html.P((tot_imp),  
+                        html.P(f"{int(totfacebook):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
                                "font-size": "40px",
                                "font-family": "Sitka Text",        
                                #"font-weight": 'bold'
-                        }),                      
-       ]),style={ "background-color": "light",
-                  "box-shadow": "10px 20px 30px gray",
+                        }),                             
+                         ]),style={ "background-color": "light",
+                  "box-shadow": "10px 20px 30px black",
                   'margin-left': '150px',
                  } ,disabled=True)),
     
-      dbc.Col(dbc.Button(([html.P("Engagement", style={"font-size": "20px",
+      dbc.Col(dbc.Button(([html.P("Instagram", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                 html.P((tot_eng),  
+                        html.P(f"{int(totinstagram):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
                                "font-size": "40px",
                                "font-family": "Sitka Text",        
                                #"font-weight": 'bold'
-                        }),                      
+                        }),                             
        ]),style={ "background-color": "light",
-                  "box-shadow": "10px 20px 30px gray",
+                  "box-shadow": "10px 20px 30px black",
                  'margin-left': '80px',
                  } ,disabled=True), )
     ], ),
