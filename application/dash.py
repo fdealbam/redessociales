@@ -371,12 +371,18 @@ app.layout = html.Div([
                                 "font-family":"Sitka Text","color":"gray",}),
   html.Br(),
   html.Br(),
+  html.Br(),
+  html.Br(),
+  html.Br(),
     dbc.Row(
         [dbc.Col(html.P(['Impacto de la imagen institucional']),
-                style={"font-size":58, "margin-left":"100px",
+                style={"font-size":58, "margin-left":"120px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ], ),
+  html.Br(),
+  html.Br(),
+  html.Br(),
   html.Br(),
   html.Br(),
   html.Br(),
@@ -578,7 +584,7 @@ app.layout = html.Div([
  
 
      # Presencia en medios    
-     dbc.Button(([html.P(className="far fa-file-alt", 
+     dbc.Button(([html.P(className="fas fa-head-cough", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
                                               "font-size": "80px"}),
@@ -613,7 +619,7 @@ app.layout = html.Div([
 
        dbc.Row(
             [dbc.Col(dbc.CardImg(src="https://github.com/fdealbam/Vacunas/blob/main/SRE.JPG?raw=true?raw=true"),
-                        width={'size': 1,  "offset": 1 }),
+                        width={'size': 1,  "offset": 8 }),
              dbc.Col(html.H5("Secretaría de Relaciones Exteriores, "
                             "Subsecretaría para Asuntos Multilaterales y "
                             "Derechos Humanos"),
@@ -630,8 +636,6 @@ app.layout = html.Div([
             #'height': '1413px',
          #   'backgroundColor': 'white'
             },)
-
-
 
 
 
