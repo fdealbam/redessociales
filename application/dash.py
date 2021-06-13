@@ -1,6 +1,3 @@
-
-
-
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -247,23 +244,32 @@ figvac_engagement.update_traces(rotation=265,
 ###########################################################################
 
 
-figaro2 = go.Figure()
-figaro2.add_trace(go.Bar(x=numeralia2['Periodo'],y=numeralia2['Nuevos seguidores'],
-                marker_color="#01579B"  # cambiar nuemeritos de rgb
-               ))
-figaro2.update_layout(
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)',
-    xaxis_tickangle=-45,
-    template = 'simple_white',
-    #title='Seguidores Facebook',
-    title_font_size= 14,
-    xaxis_tickfont_size= 16,
-    width=1600,
-    height=600
-    )
+#figaro2 = go.Figure()
+#figaro2.add_trace(go.Bar(x=numeralia2['Periodo'],y=numeralia2['Nuevos seguidores'],
+#                marker_color="#01579B"  # cambiar nuemeritos de rgb
+#               ))
+#figaro2.update_layout(
+#    paper_bgcolor='rgba(0,0,0,0)',
+#    plot_bgcolor='rgba(0,0,0,0)',
+#    xaxis_tickangle=-45,
+#    template = 'simple_white',
+#    #title='Seguidores Facebook',
+#    title_font_size= 14,
+#    xaxis_tickfont_size= 16,
+#    width=1600,
+#    height=600
+#    )
 
-
+figtres = go.Figure(data=[
+    go.Bar(name='Facebook', x=numeralia["Periodo"], y=numeralia2["Nuevos likes"], marker_color='#1A237E'),
+    go.Bar(name='Instagram', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores.1"], marker_color='#880E4F'),
+    go.Bar(name='Twitter', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores"], marker_color='#82B1FF')
+])
+# Change the bar mode
+figtres.update_layout(height=600,width=1250,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',xaxis_tickfont_size= 16,title_font_size= 14,
+                    legend = dict(font = dict(family = "Sitka Text", size = 16, color = "black")),
+                  legend_title = dict(font = dict(family = "Sitka Text", size = 16, color = "black")))
 
 ###########################################################################    
 # RECUADRO GENERAL 
@@ -368,7 +374,8 @@ app.layout = html.Div([
   html.Br(),
     
     #Cuadros totales generales 
-      dbc.Button(([html.P("Seguidores", style={"font-size": "20px",
+    dbc.Row([
+        dbc.Col(dbc.Button(([html.P("Seguidores", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
                  html.P(f"{int(totseggral):,}",  
                         style={
@@ -380,8 +387,9 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
+              
                   'margin-left': '250px',
-                 } ,disabled=True),
+                 } ,disabled=True)),
     
 #     dbc.Button(([html.P("Alcance", style={"font-size": "20px",
 #                                             "font-family":"Sitka Text"}), 
@@ -398,7 +406,7 @@ app.layout = html.Div([
 #                 'margin-left': '225px',
 #                } ,disabled=True),
 #   
-      dbc.Button(([html.P("Impresiones", style={"font-size": "20px",
+     dbc.Col(dbc.Button(([html.P("Impresiones", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
                  html.P((tot_imp),  
                         style={
@@ -410,10 +418,10 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '180px',
-                 } ,disabled=True),
+                  'margin-left': '150px',
+                 } ,disabled=True)),
     
-      dbc.Button(([html.P("Engagement", style={"font-size": "20px",
+      dbc.Col(dbc.Button(([html.P("Engagement", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
                  html.P((tot_eng),  
                         style={
@@ -425,8 +433,9 @@ app.layout = html.Div([
                         }),                      
        ]),style={ "background-color": "light",
                   "box-shadow": "10px 20px 30px gray",
-                  'margin-left': '180px',
-                 } ,disabled=True),
+                 'margin-left': '80px',
+                 } ,disabled=True), )
+    ], ),
   html.Br(),
   html.Br(),
   html.Br(),
@@ -475,13 +484,14 @@ app.layout = html.Div([
     ##############################################################
 #GRAFICA BARRAS
     #############################################################
-    html.P("Evolución de seguidores en Facebook",style={"font-size":48, "margin-left":"100px",
+    html.P("Evolución de nuevos seguidores",style={"font-size":48, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
     dbc.Row([
-        dbc.Col(dcc.Graph(figure=figaro2),#, config= "autosize"),
-                style={"margin-left": "10px"}),
+        dbc.Col(dcc.Graph(figure=figtres),#, config= "autosize"),
+                style={"margin-left": "10px",
+                      }),
     ]),
     
     
@@ -510,12 +520,13 @@ app.layout = html.Div([
                dbc.Button((["", html.P(className="fas fa-users", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
-                                              "font-size": "100px"}),
+                                              "font-size": "80px"}),
                                 html.Br(),
                                 html.Br(),
-                            html.P(f"{int(entrevistas):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
+                            html.P(f"{int(entrevistas):,}", 
+                                   style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                                 html.Br(),
-                                html.P("Entrevistas", style={"font-size":25}),
+                                html.P("Entrevistas", style={"font-size":20}),
                                         ]),style={"background-color": "#FAFAFA",
                                          "margin-left": "150px",         
                                          #"margin-right": "50px",
@@ -524,12 +535,12 @@ app.layout = html.Div([
      # Comunicados    
                dbc.Button((["", html.P(className="fas fa-bullhorn", 
                                        style={"color": "#78909C",
-                                              "font-size": "100px"}),
+                                              "font-size": "80px"}),
                                 html.Br(),
                                 html.Br(),
                                 html.P(f"{int(comunicados):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                                 html.Br(),
-                                html.P("Comunicados", style={"font-size":25}),
+                                html.P("Comunicados", style={"font-size":20}),
                                ]),style={#"margin-right": "50px",
                                          "margin-left": "150px",
                                          "background-color": "#FAFAFA"}),
@@ -538,12 +549,12 @@ app.layout = html.Div([
      dbc.Button(([html.P(className="far fa-file-alt", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
-                                              "font-size": "100px"}),
+                                              "font-size": "80px"}),
                                 html.Br(),
                                 html.Br(),
                                 html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                                 html.Br(),
-                                html.P("artículos", style={"font-size":25}),
+                                html.P("artículos", style={"font-size":20}),
                                ]),style={"margin-left": "150px",
                                          #"margin-right": "120px",
                                          "background-color": "#FAFAFA"}),
@@ -553,12 +564,12 @@ app.layout = html.Div([
      dbc.Button(([html.P(className="far fa-file-alt", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
-                                              "font-size": "100px"}),
+                                              "font-size": "80px"}),
                                 html.Br(),
                                 html.Br(),
                                 html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                                 html.Br(),
-                                html.P("Presencia en medios", style={"font-size":25}),
+                                html.P("Presencia en medios", style={"font-size":20}),
                                ]),style={"margin-left": "150px",
                                          #"margin-right": "120px",
                                          "background-color": "#FAFAFA"}),
@@ -598,7 +609,7 @@ app.layout = html.Div([
             style={
           #  'margin-top': '0px',
            # 'margin-left': '5px',
-           # 'width': '1400px',
+            'width': '1400px',
             #'height': '1413px',
          #   'backgroundColor': 'white'
             },)
@@ -609,4 +620,3 @@ app.layout = html.Div([
 
 if __name__ == '__main__':
     app.run_server()
- 
