@@ -227,8 +227,8 @@ figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size=10,
                   legend_title_text="top",
                   title_font_color="black",
-                  width=300,
-                  height=300,
+                  width=350,
+                  height=350,
                   showlegend=False),
     
 colors = ['#B3E5FC']
@@ -371,11 +371,20 @@ app.layout = html.Div([
                                 "font-family":"Sitka Text","color":"gray",}),
   html.Br(),
   html.Br(),
+    dbc.Row(
+        [dbc.Col(html.P(['Impacto de la imagen institucional']),
+                style={"font-size":58, "margin-left":"100px",
+                                "font-family":"Sitka Text","color":"purple",
+                                "text-align": "left"}),
+    ], ),
+  html.Br(),
+  html.Br(),
+  html.Br(),
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Total de seguidores en el período (ene-abr)']),
-                style={"font-size":48, "margin-left":"100px",
+        [dbc.Col(html.P(['Total de seguidores (ene-abr)']),
+                style={"font-size":40, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ], ),
@@ -453,8 +462,8 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Crecimiento imagen institucional (ene-abr)']),
-                style={"font-size":48, "margin-left":"100px",
+        [dbc.Col(html.P(['Imagen institucional (ene-abr)']),
+                style={"font-size":40, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ]),
@@ -492,7 +501,7 @@ app.layout = html.Div([
     ##############################################################
 #GRAFICA BARRAS
     #############################################################
-    html.P("Evolución de nuevos seguidores",style={"font-size":48, "margin-left":"100px",
+    html.P("Nuevos seguidores, según red",style={"font-size":40, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
@@ -512,7 +521,7 @@ app.layout = html.Div([
      html.Br(),
     
     
-    html.P("Influencia en medios (ene-abr)",style={"font-size":48, "margin-left":"100px",
+    html.P("Influencia en medios (ene-abr)",style={"font-size":40, "margin-left":"100px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
