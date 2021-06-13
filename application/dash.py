@@ -1,5 +1,6 @@
 
 
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -25,12 +26,11 @@ numeralia = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociale
 #Falta renombrar columnas de la bd final 
 numeralia2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 
-totalesredes = pd.read_csv("Seguimiento RS, comunicados, art, entrevistas 2021.csv")
+totalesredes = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Seguimiento%20RS%2C%20comunicados%2C%20art%2C%20entrevistas%202021a.csv")
 totfacebook= totalesredes["27-may"][0:1]
 totfacebook
 
 
-totalesredes = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Seguimiento%20RS%2C%20comunicados%2C%20art%2C%20entrevistas%202021a.csv")
 
 
 
