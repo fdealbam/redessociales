@@ -1,3 +1,5 @@
+
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -18,14 +20,17 @@ import flask
 import os
 
 
-
 numeralia = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 #Falta renombrar columnas de la bd final 
 numeralia2 = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Numeralia%20redes%20sociales.csv", error_bad_lines=False)
 
+
+medios = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/medios.csv", encoding='latin-1')
+redes = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/redes.csv", encoding='latin-1')
+
 totalesredes = pd.read_csv("https://raw.githubusercontent.com/fdealbam/redessociales/main/Seguimiento%20RS%2C%20comunicados%2C%20art%2C%20entrevistas%202021a.csv")
-totfacebook= totalesredes["27-may"][0:1]
-totfacebook
+#totfacebook= totalesredes["27-may"][0:1]
+#totfacebook
 
 
 
@@ -36,37 +41,41 @@ totfacebook
 ###########################################################################
 
 #1
-#identificadores FACEBOOK
-seg_fb = numeralia2["Nuevos likes"].sum()
-alc_fb = numeralia2["Cantidad de posts"].sum()
-imp_fb = numeralia2["Cantidad de comentarios"].sum()
-eng_fb = numeralia2["Mensajes recibidos.2"].sum()
+#Instagram
+seg_tw = redes.iloc[0]["Seguidores"]
+imp_tw = redes.iloc[0]["Impresiones"] 
+int_tw = redes.iloc[0]["Interacciones"]
+nws_tw = redes.iloc[0]["Nuevos seguidores"]
+tot_tw = seg_tw+imp_tw+int_tw+nws_tw #Total TW
 
-#2
-#identificadores TWITTER
-seg_tw =  numeralia2["Nuevos seguidores"].sum()
-alc_tw =  numeralia2["Número de tweets"].sum()
-imp_tw =  numeralia2["Retweets realizados"].sum()
-eng_tw =  numeralia2["Mensajes recibidos"].sum()
 
-#3
-#identificadores INSTAGRAM
-seg_insta = numeralia2["Nuevos seguidores.1"].sum()
-alc_insta = numeralia2["Número de posts"].sum()
-imp_insta = numeralia2["Número de Stories"].sum()
-eng_insta = numeralia2["Mensajes recibidos.1"].sum()
+#FB
+seg_fb = redes.iloc[1]["Seguidores"]
+imp_fb = redes.iloc[1]["Impresiones"] 
+int_fb = redes.iloc[1]["Interacciones"]
+nws_fb = redes.iloc[1]["Nuevos seguidores"]
+tot_fb = seg_fb+imp_fb+int_fb+nws_fb #Total fb
+
+#IG
+seg_insta = redes.iloc[2]["Seguidores"]
+imp_insta = redes.iloc[2]["Impresiones"] 
+int_insta = redes.iloc[2]["Interacciones"]
+nws_insta = redes.iloc[2]["Nuevos seguidores"]
 
 
 #articulos, comunicados, entrevistas
-articulos   = numeralia2["Cantidad de artículos"].sum()
-comunicados = numeralia2["Cantidad de comunicados"].sum()
-entrevistas = numeralia2["Cantidad de entrevistas"].sum()
+articulos=medios.iloc[4]['Artículos']
+comunicados=medios.iloc[4]['Comunicados']
+entrevistas=medios.iloc[4]['Entrevistas']
+presenciamed=medios.iloc[4]['Presencia en medios']
+
+
 
 #totales secciones
-tot_seg = seg_fb + seg_tw + seg_insta    
-tot_alc = alc_fb + alc_tw + alc_insta
-tot_imp = imp_fb + imp_tw + imp_insta
-tot_eng = eng_fb + eng_tw + eng_insta
+#tot_seg = seg_fb + seg_tw + seg_insta    
+#tot_alc = alc_fb + alc_tw + alc_insta
+#tot_imp = imp_fb + imp_tw + imp_insta
+#tot_eng = eng_fb + eng_tw + eng_insta
 
 
 tot= totalesredes["27-may"][0:4].astype(int)
@@ -79,109 +88,84 @@ totinstagram = tot[2]
 # gráfica donas
 ###########################################################################    
     
-#tratamiento para gráfica 
 
 # Add the grand total row, summing all values in a column
-base = numeralia.loc['Grand Total', :] = numeralia.sum()
-base.to_csv("basetotales.csv")
-abre= pd.read_csv("basetotales.csv")
-abre.rename(columns = {"0":'valor', 'Unnamed: 0':'variable'}, inplace = True)
+#base = numeralia.loc['Grand Total', :] = numeralia.sum()
+#base.to_csv("basetotales.csv")
+#abre= pd.read_csv("basetotales.csv")
+#abre.rename(columns = {"0":'valor', 'Unnamed: 0':'variable'}, inplace = True)
 
-#seleccionar columnas seguidores
-seguidor = abre[(abre["variable"] == "Nuevos seguidores")|
-                  (abre["variable"] == "Nuevos seguidores.1")|
-                  (abre["variable"] == "Nuevos likes")]
-
-
-seguidor.to_csv("seguidores.csv")
-seguidores = pd.read_csv("seguidores.csv")
 
 
 
 ################################################### 
 # Grafica 1. SEGUIDORES
-
-figvac_seguidores = px.pie(seguidores, values=[2089, 363, 379], names='variable',
-                color_discrete_sequence=px.colors.sequential.Peach, hole=.3,
-                    )
-
-
-figvac_seguidores.update_layout(
-    #title="Seguidores",
-                  paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',
-                  autosize=True,
-                  font_color="black",
-                  title_font_size=10,
-                  legend_title_side="left",
-                  title_font_color="black",
-                  width=350,
-                  height=350,
-                  showlegend=False
-                               ),
-    
-colors = ['#B3E5FC']
-
-figvac_seguidores.update_traces(rotation=220,
-                               marker=dict(#colors=colors,
-                                          ))
-
-
-
-################################################### 
-## Grafica 2. ALCANCE
 #
-##seleccionar columnas alcance
-#alcanc = abre[(abre["variable"] == "Cantidad de posts")|
-#                (abre["variable"] == "Número de tweets")|
-#                (abre["variable"] == "Número de posts")]
+#figvac_seguidores = px.pie(redes, values=redes["Seguidores"], names=redes['Redes sociales'],
+#                color_discrete_sequence=px.colors.sequential.Peach, hole=.3,
+#                    )
 #
 #
-#alcanc.to_csv("alcance.csv")
-#alcance = pd.read_csv("alcance.csv")
-#
-##-GRÁFICA ALCANCE
-#figvac_alcance = px.pie(alcance, values='valor', names='variable',
-#                color_discrete_sequence=px.colors.sequential.Brwnyl, hole=.3,
-#                      )
-#
-#figvac_alcance.update_layout(
-#    #title="Alcance",
-#    paper_bgcolor='rgba(0,0,0,0)',
+#figvac_seguidores.update_layout(
+#    #title="Seguidores",
+#                  paper_bgcolor='rgba(0,0,0,0)',
 #                  plot_bgcolor='rgba(0,0,0,0)',
 #                  autosize=True,
 #                  font_color="black",
 #                  title_font_size=10,
-#                  legend_title_text="top",
+#                  legend_title_side="left",
 #                  title_font_color="black",
-#                  width=300,
-#                  height=300,
-#                  showlegend=False),
+#                  width=350,
+#                  height=350,
+#                  showlegend=False
+#                               ),
 #    
 #colors = ['#B3E5FC']
 #
-#figvac_alcance.update_traces(rotation=220,
-#                               marker=dict(#colors=colors
+#figvac_seguidores.update_traces(rotation=220,
+#                               marker=dict(#colors=colors,
 #                                          ))
-#
 
 
 
 ################################################### 
-# Grafica 3. IMPRESIONES
+## Grafica 2. IMPRESIONES
 
 
-#seleccionar columnas impresiones
-impresione = abre[(abre["variable"] == "Cantidad de comentarios")|
-                  (abre["variable"] == "Retweets realizados")|
-                  (abre["variable"] == "Número de Stories")]
+#-GRÁFICA ALCANCE
+figvac_alcance = px.pie(redes, values='Impresiones', names='Redes sociales',
+                color_discrete_sequence=px.colors.sequential.Brwnyl, hole=.3,
+                      )
+
+figvac_alcance.update_layout(
+    #title="Alcance",
+    paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  autosize=True,
+                  font_color="black",
+                  title_font_size=10,
+                  legend_title_text="top",
+                  title_font_color="black",
+                  width=400,
+                  height=400,
+                  showlegend=False),
+    
+colors = ['#B3E5FC']
+
+figvac_alcance.update_traces(rotation=220,
+                               marker=dict(#colors=colors
+                                          ))
 
 
-impresione.to_csv("impresiones.csv")
-impresiones = pd.read_csv("impresiones.csv")
+
+
+################################################### 
+# Grafica 3. Interacciones
+
+
 #Grafica impresiones
 
-figvac_impresiones = px.pie(impresiones, values='valor', names='variable',
+figvac_impresiones = px.pie(redes, values='Interacciones', names='Redes sociales',
                 color_discrete_sequence=px.colors.sequential.Tealgrn, hole=.3)
 
 figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
@@ -192,8 +176,8 @@ figvac_impresiones.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   title_font_size=10,
                   legend_title_text="top",
                   title_font_color="black",
-                  width=350,
-                  height=350,
+                  width=400,
+                  height=400,
                   showlegend=False),
     
 colors = ['#B3E5FC']
@@ -205,21 +189,12 @@ figvac_impresiones.update_traces(rotation=250,
 
 
 ################################################### 
-# Grafica 4. ENGAGEMENT
+# Grafica 4. Nuevos Seguidores
 
-
-#seleccionar columnas engagement
-engagemen= abre[(abre["variable"] == "Mensajes recibidos.2")|
-                (abre["variable"] == "Mensajes recibidos")|
-                (abre["variable"] == "Mensajes recibidos.1")]
-
-
-engagemen.to_csv("engagement.csv")
-engagement = pd.read_csv("engagement.csv")
-figvac_engagement = px.pie(engagement, values='valor', names='variable',
+figvac_newseguidores = px.pie(redes, values='Nuevos seguidores', names='Redes sociales',
                 color_discrete_sequence=px.colors.sequential.Purp, hole=.3)
 
-figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
+figvac_newseguidores.update_layout(paper_bgcolor='rgba(0,0,0,0)',
                   #title="Engagement ",
                   plot_bgcolor='rgba(0,0,0,0)',
                   autosize=True,
@@ -233,7 +208,7 @@ figvac_engagement.update_layout(paper_bgcolor='rgba(0,0,0,0)',
     
 colors = ['#B3E5FC']
 
-figvac_engagement.update_traces(rotation=265,
+figvac_newseguidores.update_traces(rotation=265,
                                marker=dict(#colors=colors
                                           ))
 
@@ -262,16 +237,19 @@ figvac_engagement.update_traces(rotation=265,
 #    height=600
 #    )
 
+
+
 figtres = go.Figure(data=[
+    go.Bar(name='Twitter', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores"], marker_color='#82B1FF'),
     go.Bar(name='Facebook', x=numeralia["Periodo"], y=numeralia2["Nuevos likes"], marker_color='#1A237E'),
     go.Bar(name='Instagram', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores.1"], marker_color='#880E4F'),
-    go.Bar(name='Twitter', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores"], marker_color='#82B1FF')
 ])
 # Change the bar mode
-figtres.update_layout(height=600,width=1390,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
-                  plot_bgcolor='rgba(0,0,0,0)',xaxis_tickfont_size= 16,title_font_size= 14,
-                    legend = dict(font = dict(family = "Sitka Text", size = 16, color = "black")),
-                  legend_title = dict(font = dict(family = "Sitka Text", size = 16, color = "black")))
+figtres.update_layout(height=600,width=1550,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',xaxis_tickfont_size= 16,title_font_size= 18,
+                    #legend = dict(font = dict(family = "Sitka Text", size = 16, color = "black")),
+                  legend_title = dict(font = dict(family = "Sitka Text", size = 22, color = "black")))
+
 
 ###########################################################################    
 # RECUADRO GENERAL 
@@ -279,37 +257,37 @@ figtres.update_layout(height=600,width=1390,barmode='group',paper_bgcolor='rgba(
 
 # Tabla
 table_header = [
-    html.Thead(html.Tr([html.Th("Seguidores",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
-                        #html.Th("Alcance",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center",}),
+    html.Thead(html.Tr([#html.Th("Seguidores",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
                         html.Th("Impresiones",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
-                        html.Th("Engagement",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"})
+                        html.Th("Interacciones",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center"}),
+                        html.Th("Nuevos seguidores",style={"font-size":28, "font-family":"Arial Black","color":"lightgray","text-align": "center",}),
                        ]))
 ]
 
-row1_fb = html.Tr([html.Td(f"{seg_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
-                  #html.Td(f"{alc_fb:,d}", style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
-                  html.Td(f"{imp_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
-                  html.Td(f"{eng_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
+row1_fb = html.Tr([#html.Td(f"{seg_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
+                  html.Td(f"{imp_fb:,d}", style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
+                  html.Td(f"{int_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
+                  html.Td(f"{nws_fb:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#1A237E","text-align": "center"}),
                    ])
-row2_tw = html.Tr([html.Td(f"{seg_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
-                  #html.Td(f"{alc_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
+row2_tw = html.Tr([#html.Td(f"{seg_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
                   html.Td(f"{imp_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
-                  html.Td(f"{eng_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}), 
+                  html.Td(f"{int_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}),
+                  html.Td(f"{nws_tw:,d}",style={"font-size":48, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center"}), 
                  ])
-row3_it = html.Tr([html.Td(f"{seg_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
-                   #html.Td(f"{alc_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
+row3_it = html.Tr([#html.Td(f"{seg_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
                    html.Td(f"{imp_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
-                   html.Td(f"{eng_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"})
+                   html.Td(f"{int_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"}),
+                   html.Td(f"{nws_insta:,d}",style={"font-size":38, "font-family":"Sitka Text","color":"#880E4F","text-align": "center"})
                   ])
 
-row_gs= html.Tr([html.Td(dcc.Graph(figure=figvac_seguidores)),
-                 #html.Td(dcc.Graph(figure=figvac_alcance)),
+row_gs= html.Tr([#html.Td(dcc.Graph(figure=figvac_seguidores)),
+                 html.Td(dcc.Graph(figure=figvac_alcance)),
                  html.Td(dcc.Graph(figure=figvac_impresiones)),
-                 html.Td(dcc.Graph(figure=figvac_engagement)), 
+                 html.Td(dcc.Graph(figure=figvac_newseguidores)), 
                  
                 ])
 
-table_body = [html.Tbody([row1_fb, row2_tw, row3_it, row_gs])]
+table_body = [html.Tbody([row2_tw, row1_fb,  row3_it, row_gs])]
 
 
 
@@ -393,11 +371,9 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
   html.Br(),
-  html.Br(),
-  html.Br(),
     dbc.Row(
         [dbc.Col(html.P(['Total de seguidores (ene-abr)']),
-                style={"font-size":40, "margin-left":"100px",
+                style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ], ),
@@ -405,9 +381,13 @@ app.layout = html.Div([
     
     #Cuadros totales generales 
     dbc.Row([
-        dbc.Col(dbc.Button(([html.P("Twitter", style={"font-size": "20px",
+        dbc.Col(dbc.Button(([html.P(className="fab fa-twitter", 
+                                       style={"color": "#01579B",
+                                              "background-color": "light",
+                                              "font-size": "80px"}),
+        html.P("Twitter", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                 html.P(f"{int(tottwitter):,}",  
+                 html.P(f"{int(seg_tw):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
@@ -436,9 +416,13 @@ app.layout = html.Div([
 #                 'margin-left': '225px',
 #                } ,disabled=True),
 #   
-         dbc.Col(dbc.Button(([html.P("Facebook", style={"font-size": "20px",
+         dbc.Col(dbc.Button(([html.P(className="fab fa-facebook", 
+                                       style={"color": "#01579B",
+                                              "background-color": "light",
+                                              "font-size": "80px"}),
+                        html.P("Facebook", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                        html.P(f"{int(totfacebook):,}",  
+                        html.P(f"{int(seg_fb):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
@@ -451,9 +435,13 @@ app.layout = html.Div([
                   'margin-left': '150px',
                  } ,disabled=True)),
     
-      dbc.Col(dbc.Button(([html.P("Instagram", style={"font-size": "20px",
+      dbc.Col(dbc.Button(([html.P(className="fab fa-instagram", 
+                                       style={"color": "#C51162",
+                                              "background-color": "light",
+                                              "font-size": "80px"}),
+                        html.P("Instagram", style={"font-size": "20px",
                                               "font-family":"Sitka Text"}), 
-                        html.P(f"{int(totinstagram):,}",  
+                        html.P(f"{int(seg_insta):,}",  
                         style={
                                "color": "dark", 
                                #"font-weight": 'bold',
@@ -476,7 +464,7 @@ app.layout = html.Div([
   html.Br(),
     dbc.Row(
         [dbc.Col(html.P(['Imagen institucional (ene-abr)']),
-                style={"font-size":40, "margin-left":"100px",
+                style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
     ]),
@@ -484,9 +472,9 @@ app.layout = html.Div([
     #ICONOS
  ####################################################
   dbc.Button(([
-      dbc.Row(html.P(className="fab fa-facebook",style={'margin-top':'1.3em',"color": "#01579B" ,"font-size": "75px"} )),
+      dbc.Row(html.P(className="fab fa-twitter",style={'margin-top':'1.9em', "color": "#01579B","font-size": "75px"})),
                    html.Br(),
-      dbc.Row(html.P(className="fab fa-twitter",style={"color": "#01579B","font-size": "75px"})),
+      dbc.Row(html.P(className="fab fa-facebook",style={"color": "#01579B" ,"font-size": "75px"} )),
                    html.Br(),
       dbc.Row(html.P(className="fab fa-instagram",style={"color": "#C51162", "font-size": "75px"})),
                    html.Br(),
@@ -513,28 +501,28 @@ app.layout = html.Div([
     
     ##############################################################
 #GRAFICA BARRAS
-    #############################################################
-    html.P("Nuevos seguidores, según red",style={"font-size":40, "margin-left":"100px",
-                                "font-family":"Sitka Text","color":"purple",
-                                "text-align": "left"}),
+   #############################################################
+  html.P("Nuevos seguidores, según red",style={"font-size":40, "margin-left":"100px",
+                               "font-family":"Sitka Text","color":"purple",
+                               "text-align": "left"}),
 
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=figtres),#, config= "autosize"),
-                style={"margin-left": "10px",
-                      }),
-    ]),
+   dbc.Row([
+       dbc.Col(dcc.Graph(figure=figtres),#, config= "autosize"),
+               style={"margin-left": "10px",
+                     }),
+   ]),
+   
+   
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     
     
-     html.Br(),
-     html.Br(),
-     html.Br(),
-     html.Br(),
-     html.Br(),
-     html.Br(),
-     html.Br(),
-    
-    
-    html.P("Influencia en medios (ene-abr)",style={"font-size":40, "margin-left":"100px",
+    html.P("Influencia en medios (ene-abr)",style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
@@ -545,9 +533,25 @@ app.layout = html.Div([
 ################################################################
     
      dbc.Row([
+
+     # Presencia en medios     
+     dbc.Button(([html.P(className="far fa-newspaper", 
+                                       style={"color": "#78909C",
+                                              "background-color": "light",
+                                              "font-size": "90px"}),
+                                html.Br(),
+                                html.Br(),
+                                html.P(f"{int(presenciamed):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
+                                html.Br(),
+                                html.P("Presencia en medios", style={"font-size":20}),
+                               ]),style={"margin-left": "150px",
+                                         #"margin-right": "120px",
+                                         "background-color": "#FAFAFA"}),
+ 
+         
          
      # Entrevistas    
-               dbc.Button((["", html.P(className="fas fa-users", 
+               dbc.Button(([html.P(className="fas fa-users", 
                                        style={"color": "#78909C",
                                               "background-color": "light",
                                               "font-size": "80px"}),
@@ -563,7 +567,7 @@ app.layout = html.Div([
                                         }),      
 
      # Comunicados    
-               dbc.Button((["", html.P(className="fas fa-bullhorn", 
+               dbc.Button(([html.P(className="fas fa-bullhorn", 
                                        style={"color": "#78909C",
                                               "font-size": "80px"}),
                                 html.Br(),
@@ -590,20 +594,6 @@ app.layout = html.Div([
                                          "background-color": "#FAFAFA"}),
  
 
-     # Presencia en medios     
-     dbc.Button(([html.P(className="far fa-newspaper", 
-                                       style={"color": "#78909C",
-                                              "background-color": "light",
-                                              "font-size": "90px"}),
-                                html.Br(),
-                                html.Br(),
-                                html.P(f"{int(articulos):,}", style={"font-size":65, "font-family":"Sitka Text","color":"#82B1FF","text-align": "center",}),
-                                html.Br(),
-                                html.P("Presencia en medios", style={"font-size":20}),
-                               ]),style={"margin-left": "150px",
-                                         #"margin-right": "120px",
-                                         "background-color": "#FAFAFA"}),
- 
          
          
          
@@ -650,3 +640,4 @@ app.layout = html.Div([
 
 if __name__ == '__main__':
     app.run_server()
+    
