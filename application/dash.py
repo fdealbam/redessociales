@@ -1,5 +1,4 @@
 
-
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -64,10 +63,11 @@ nws_insta = redes.iloc[2]["Nuevos seguidores"]
 
 
 #articulos, comunicados, entrevistas
-articulos=medios.iloc[4]['Artículos']
-comunicados=medios.iloc[4]['Comunicados']
-entrevistas=medios.iloc[4]['Entrevistas']
-presenciamed=medios.iloc[4]['Presencia en medios']
+#Arreglar automatico seleccionar ultima fila... Winik help!
+articulos=medios.iloc[6]['Articulos']
+comunicados=medios.iloc[6]['Comunicados']
+entrevistas=medios.iloc[6]['Entrevistas']
+presenciamed=medios.iloc[6]['Presencia en medios']
 
 
 
@@ -240,9 +240,9 @@ figvac_newseguidores.update_traces(rotation=265,
 
 
 figtres = go.Figure(data=[
-    go.Bar(name='Twitter', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores"], marker_color='#82B1FF'),
-    go.Bar(name='Facebook', x=numeralia["Periodo"], y=numeralia2["Nuevos likes"], marker_color='#1A237E'),
-    go.Bar(name='Instagram', x=numeralia2["Periodo"], y=numeralia2["Nuevos seguidores.1"], marker_color='#880E4F'),
+    go.Bar(name='Twitter', x=numeralia2["Nuevo seguidores"], y=numeralia2["Twitter"], marker_color='#82B1FF'),
+    go.Bar(name='Facebook', x=numeralia2["Nuevo seguidores"], y=numeralia2["Facebook FP"], marker_color='#1A237E'),
+    go.Bar(name='Instagram', x=numeralia2["Nuevo seguidores"], y=numeralia2["Instagram"], marker_color='#880E4F'),
 ])
 # Change the bar mode
 figtres.update_layout(height=600,width=1550,barmode='group',paper_bgcolor='rgba(0,0,0,0)',
@@ -639,4 +639,3 @@ app.layout = html.Div([
 
 if __name__ == '__main__':
     app.run_server()
-    
