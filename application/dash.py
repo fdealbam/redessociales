@@ -344,7 +344,7 @@ app.layout = html.Div([
                         width={'size': 3, 'offset' : 0}), 
         ],justify="start"),
   html.Br(),
-  html.P("Período: del 1o de enero al 30 de abril 2021", 
+  html.P("Período:  de enero a junio 2021", 
          style={"font-size":20, "margin-left":"250px",
                                 "font-family":"Sitka Text","color":"gray",}),
   html.Br(),
@@ -372,7 +372,7 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Total de seguidores (ene-abr)']),
+        [dbc.Col(html.P(['Total de seguidores (ene-jun)']),
                 style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
@@ -463,7 +463,7 @@ app.layout = html.Div([
   html.Br(),
   html.Br(),
     dbc.Row(
-        [dbc.Col(html.P(['Imagen institucional (ene-abr)']),
+        [dbc.Col(html.P(['Imagen institucional (ene-jun)']),
                 style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
@@ -522,7 +522,7 @@ app.layout = html.Div([
     html.Br(),
     
     
-    html.P("Influencia en medios (ene-abr)",style={"font-size":40, "margin-left":"450px",
+    html.P("Influencia en medios (ene-jun)",style={"font-size":40, "margin-left":"450px",
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
 
