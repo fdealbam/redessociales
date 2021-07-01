@@ -358,7 +358,8 @@ app.layout = html.Div([
                                 "font-family":"Sitka Text","color":"purple",
                                 "text-align": "left"}),
          
-        html.P('En este dashboard se presentan análisis de los distintos impactos que en redes sociales tiene la Subsecretaría, específicamente en Twitter, Facebook e Instagram, en el intervalo que comprenden del mes de enero a abril 2021.',
+        html.P('En este dashboard se presentan análisis de los distintos impactos que en redes sociales tiene la Subsecretaría,"+
+               "específicamente en Twitter, Facebook e Instagram, en el intervalo que comprenden del mes de enero a junio 2021.',
                 style={"font-size":22, "margin-left":"130px",
                                 "font-family":"Sitka Text",
                                 "color":"black",
